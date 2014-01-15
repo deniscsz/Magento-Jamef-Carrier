@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Spalenza_Jamef>
+      <version>1.0.0</version>
+    </Spalenza_Jamef>
+  </modules>
+  <global>
+    <helpers>
+      <jamef>
+        <class>Spalenza_Jamef_Helper</class>
+      </jamef>
+    </helpers>
+    <models>
+      <jamef>
+        <class>Spalenza_Jamef_Model</class>
+        <resourceModel>jamef_mysql4</resourceModel>
+      </jamef>
+    </models>
+  </global>
+  <frontend>
+    <translate>
+      <modules>
+        <Spalenza_Jamef>
+          <files>
+            <default>Spalenza_Jamef.csv</default>
+          </files>
+        </Spalenza_Jamef>
+      </modules>
+    </translate>
+  </frontend>
+    <default>
+        <carriers>
+            <jamef>
+                <active>1</active>
+                <model>jamef/carrier_jamef</model>
+                <name>Jamef Encomendas Urgentes</name>
+                <title>Transportadora</title>
+                <description>Transportadora Jamef</description>
+                <sort_order>99</sort_order>
+                <url>http://www.jamef.com.br/internet/e-comerce/calculafrete.asp</url>
+                <ws_timeout>20</ws_timeout>
+            </jamef>
+        </carriers>
+    </default>
+</config> 
