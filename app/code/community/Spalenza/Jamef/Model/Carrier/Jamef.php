@@ -61,12 +61,11 @@ class Spalenza_Jamef_Model_Carrier_Jamef
             $array = explode(' - ',$answer);
             $result = end($array);
             
-            Mage::log('REsultado: '.$result);
             if($result == 'Rota nao atendida pela transportadora') {
                 return false;
             }
             else {
-                return str_replace(',','.',$result);
+                return str_replace(',','.',substr($result, 0, -4));
             }
         }
         
@@ -90,8 +89,6 @@ class Spalenza_Jamef_Model_Carrier_Jamef
             $client->setParameterGet('P_CUBG',str_replace('.',',',$_info['cubagem']));
             $client->setParameterGet('P_COD_REGN',str_replace('.',',',$this->getConfigData('cod_regn')));
             $client->setParameterGet('P_UF',$this->getUfbyRegn());
-            
-            Mage::log($client);
             
             return $client->request()->getBody();
         }
