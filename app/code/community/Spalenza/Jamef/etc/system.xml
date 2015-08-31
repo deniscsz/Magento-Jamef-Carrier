@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <config>
-	  <sections>
-		<carriers  translate="label" module="jamef">            
-					<groups>
-				      <jamef translate="label"> 
-					  <label>Transportadora Jamef</label>
-					  <frontend_type>text</frontend_type>
-					  <sort_order>99</sort_order>
-					  <show_in_default>1</show_in_default>
-					  <show_in_website>1</show_in_website>
-					  <show_in_store>1</show_in_store>
-					  <model>jamef/carrier_jamef</model>
-				       <fields>                        
-				         <active translate="label">
+    <sections>
+        <carriers translate="label" module="jamef">
+            <groups>
+                <spalenza_jamef translate="label">
+                    <label>Transportadora Jamef</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>99</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <model>jamef/carrier_jamef</model>
+                    <fields>
+                        <active translate="label">
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -37,11 +37,20 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </name>
+                        <integracao translate="label">
+                            <label>Integration Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>jamef/system_config_source_integracao</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </integracao>
                         <format_weight translate="label">
                             <label>Weight Format</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_Diyoptions13897223372X2</source_model>
-                            <sort_order>1</sort_order>
+                            <source_model>jamef/system_config_source_weight</source_model>
+                            <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -55,16 +64,51 @@
                             <show_in_store>1</show_in_store>
                             <comment>Store's CNPJ in Jamef Account</comment>
                         </cnpj>
-                        <cod_regn translate="label">
+                        <filcot translate="label">
                             <label>Regional Code</label>
                             <frontend_type>multiselect</frontend_type>
-                            <source_model>adminhtml/system_config_source_Diyoptions13897223372</source_model>
+                            <source_model>jamef/system_config_source_region</source_model>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <comment>Regional collection point of Jamef</comment>
-                        </cod_regn>
+                        </filcot>
+                        <tiptra> translate="label">
+                            <label>Type of Transport</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>jamef/system_config_source_type</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </tiptra>
+                        <munori> translate="label">
+                            <label>City of Origin</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </munori>
+                        <estori> translate="label">
+                            <label>State of Origin</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use UF typos (e.g. SP)</comment>
+                        </estori>
+                        <segprod> translate="label">
+                            <label>Type of Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>jamef/system_config_source_products</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </segprod>
                         <description translate="label">
                             <label>Description</label>
                             <frontend_type>textarea</frontend_type>
@@ -80,11 +124,49 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <sort_order>100</sort_order>
+                            <sort_order>999</sort_order>
                         </sort_order>
-					   </fields>
-					   </jamef>
-					</groups>
-		</carriers>
-	  </sections>
+                        <debug>
+                            <label>Enable Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </debug>
+                        <showerrors>
+                            <label>Show Errors in Frontend</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showerrors>
+                        <url_homologacao>
+                            <label>URL Ws Homologação</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>9999</sort_order>
+                            <comment>Warning: Change this options maybe causes error on Shipping Estimation</comment>
+                        </url_homologacao>
+                        <url_producao>
+                            <label>URL Ws Production</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>9999</sort_order>
+                            <comment>Warning: Change this options maybe causes error on Shipping Estimation</comment>
+                        </url_producao>
+                    </fields>
+                </spalenza_jamef>
+            </groups>
+        </carriers>
+    </sections>
 </config>

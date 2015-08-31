@@ -31,16 +31,23 @@
   </frontend>
     <default>
         <carriers>
-            <jamef>
+            <spalenza_jamef>
                 <active>1</active>
                 <model>jamef/carrier_jamef</model>
                 <name>Jamef Encomendas Urgentes</name>
                 <title>Transportadora</title>
                 <description>Transportadora Jamef</description>
-                <sort_order>99</sort_order>
-                <url>http://www.jamef.com.br/internet/e-comerce/calculafrete.asp</url>
+                <sort_order>999</sort_order>
+                <!--<url>http://www.jamef.com.br/internet/e-comerce/calculafrete.asp</url>-->
+                <integracao>0</integracao>
+                <tiptra>1</tiptra>
+                <debug>0</debug>
+                <showerrors>0</showerrors>
+                <segprod>000004</segprod>
+                <url_homologacao>http://www.jamef.com.br/webservice/JAMW0520.apw?WSDL</url_homologacao>
+                <url_producao>http://www.jamef.com.br/webservice/JAMW0520.apw?WSDL</url_producao>
                 <ws_timeout>20</ws_timeout>
-            </jamef>
+            </spalenza_jamef>
         </carriers>
     </default>
 </config> 

@@ -2,19 +2,26 @@
 /**
  * Denis Spalenza
  *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the New BSD License.
- * It is also available through the world-wide-web at this URL:
- * http://www.pteixeira.com.br/new-bsd-license/
- *
  * @category   Spalenza
  * @package    Spalenza_Jamef
- * @copyright  Copyright (c) 2014 Pedro Teixeira (http://denisspalenza.com/)
  * @author     Denis Spalenza <deniscsz@gmail.com>
- * @license    http://denisspalenza.com/new-bsd-license/ New BSD License
+ * @license    Open Software License ("OSL") v. 3.0 - Veja em VF_LICENSE.txt
  */
 class Spalenza_Jamef_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    public function enabledDebug()
+    {
+        return Mage::getStoreConfigFlag('carriers/jamef/debug');
+    }
+
+    public function writeLog($obj)
+    {
+        if ($this->enabledDebug()) {
+            if(is_string($obj)){
+                Mage::log($obj, Zend_Log::DEBUG, 'spalenza_jamef.log', true);
+            }else{
+                Mage::log(var_export($obj, true), Zend_Log::DEBUG, 'spalenza_jamef.log', true);
+            }
+        }
+    }
 }
-	 
