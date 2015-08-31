@@ -11,6 +11,7 @@ Módulo de Entrega para transportadora Jamef. A estimativa de frete é feita atr
 - ~~Estimativa de valor de frete via WebService~~
 - Estimativa de Prazo
 - Tracking da Entrega
+- ~~Locale Atualizado~~
 
 Requerimentos
 --------------
