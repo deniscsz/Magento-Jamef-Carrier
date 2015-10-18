@@ -1,0 +1,4 @@
+# Author: Denis Colli Spalenza
+app/code/community/Spalenza/Jamef            app/code/community/Spalenza/Jamef
+app/etc/modules/Spalenza_Jamef.xml            app/etc/modules/Spalenza_Jamef.xml
+app/locale/pt_BR/Spalenza_Jamef.csv            app/locale/pt_BR/Spalenza_Jamef.csv

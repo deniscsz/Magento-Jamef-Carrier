@@ -1,0 +1,16 @@
+{
+    "name":"deniscsz/Magento-Jamef-Carrier",
+    "type":"magento-module",
+    "license":"OSL-3.0",
+    "homepage":"https://github.com/deniscsz/Magento-Jamef-Carrier",
+    "description":"Magento extension to create a shipping method to estimate shipping rates at Jamef shipping company (Brazil) using web service.",
+    "authors":[
+        {
+            "name":"Denis Colli Spalenza",
+            "email":"deniscsz@gmail.com"
+        }
+    ],
+    "require":{
+        "magento-hackathon/magento-composer-installer":"*"
+    },
+}
