@@ -1,6 +1,8 @@
 Magento Jamef Carrier
 ==================
 
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/1a158cbeb0cf4e00b4f63052fb6ec7d2)](https://www.codacy.com/app/deniscsz/Magento-Jamef-Carrier)
+
 Sobre o Módulo
 --------------
 
