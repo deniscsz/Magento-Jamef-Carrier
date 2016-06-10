@@ -43,7 +43,7 @@ class Spalenza_Jamef_Model_Carrier_Jamef
             $this->_fromZip = Mage::getStoreConfig('shipping/origin/postcode', $this->getStore());
             $this->_toZip = $request->getDestPostcode();
             
-            $resposta = $this->getResponseWs($this->_toZip);
+            $resposta = $this->getResponseWs($this->_toZip, $request);
             
             if($this->checkResposta($resposta) && $this->_totalPrice) {
                 if($this->getConfigFlag('debug')) {
@@ -106,8 +106,12 @@ class Spalenza_Jamef_Model_Carrier_Jamef
 
         /**
          * Get Web Response of Jamef WebService
+         * 
+         * @param string
+         * @param Mage_Shipping_Model_Rate_Request
+         * @return string
          */
-        public function getResponseWs($cep)
+        public function getResponseWs($cep, $request)
         {
             $url = $this->getUrlWebservice();
 
@@ -116,7 +120,7 @@ class Spalenza_Jamef_Model_Carrier_Jamef
                 $retorno = NULL;
             }
 
-            $info = $this->getInformations();
+            $info = $this->getInformations($request);
 
             try {
                 $parameters = new stdClass();
@@ -168,17 +172,17 @@ class Spalenza_Jamef_Model_Carrier_Jamef
          *
          * @return float
          */
-        protected function getInformations()
+        protected function getInformations($request)
         {
-            $cartItems = Mage::getSingleton('checkout/session')->getQuote()->getAllVisibleItems();
+            $items = $this->_getItems($request);
             $totalWeight = 0.0;
             $totalCubagem = 0.0;
             
-            foreach($cartItems as $item) {
+            foreach($items as $item) {
                 $_product = $item->getProduct();
                 
                 $totalCubagem += ((float)$item->getQty()) * ((float)$_product->getVolumeLargura()/100) * ((float)$_product->getVolumeAltura()/100) * ((float)$_product->getVolumeComprimento()/100);
-                $totalWeight += (float)$_product->getWeight();
+                $totalWeight += ((float)$item->getQty()) * (float)$_product->getWeight();
             }
             
             if($this->getConfigData('weight_format') == 'gr') {
@@ -228,6 +232,52 @@ class Spalenza_Jamef_Model_Carrier_Jamef
             else {
 		        return $this->getConfigData('url_homologacao');
             }
+		}
+		
+		/**
+		 * Retrieve all visible items from request
+		 *
+		 * @param Mage_Shipping_Model_Rate_Request $request Mage request
+		 * @return array
+		 */
+		protected function _getItems($request)
+		{
+			$allItems = $request->getAllItems();
+			$items = array();
+			
+			foreach ( $allItems as $item ) {
+				if ( !$item->getParentItemId() ) {
+					$items[] = $item;
+				}
+			}
+			
+			$items = $this->_loadBundleChildren($items);
+			return $items;
+		}
+		
+		/**
+		 * Filter visible and bundle children products.
+		 *
+		 * @param array $items Product Items
+		 * @return array
+		 */
+		protected function _loadBundleChildren($items)
+		{
+			$visibleAndBundleChildren = array();
+			/* @var $item Mage_Sales_Model_Quote_Item */
+			foreach ($items as $item) {
+				$product = $item->getProduct();
+				$isBundle = ($product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE);
+				if ($isBundle) {
+					/* @var $child Mage_Sales_Model_Quote_Item */
+					foreach ($item->getChildren() as $child) {
+						$visibleAndBundleChildren[] = $child;
+					}
+				} else {
+					$visibleAndBundleChildren[] = $item;
+				}
+			}
+			return $visibleAndBundleChildren;
 		}
 
         /**
